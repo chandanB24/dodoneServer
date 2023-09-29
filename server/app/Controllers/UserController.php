@@ -32,7 +32,11 @@ class UserController extends ResourceController{
                     ];
 
                 $insertData = $userModel->insert($data);
-                return $this->respond($data);              
+                
+                if($insertData){
+                    $getCurrentUser = $userModel->getCurrentUserData($data['email']);
+                    return $this->respond($getCurrentUser);
+                }             
             
         }
 

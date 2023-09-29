@@ -10,6 +10,7 @@ Options -Indexes
 <IfModule mod_rewrite.c>
 	Options +FollowSymlinks
 	RewriteEngine On
+	
 
 	# If you installed CodeIgniter in a subfolder, you will need to
 	# change the following line to match the subfolder you need.
@@ -17,9 +18,11 @@ Options -Indexes
 	# RewriteBase /
 
 	# Redirect Trailing Slashes...
+	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_URI} (.+)/$
 	RewriteRule ^ %1 [L,R=301]
+	
 
 	# Rewrite "www.example.com -> example.com"
 	RewriteCond %{HTTPS} !=on

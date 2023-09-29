@@ -5,6 +5,14 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
     protected $table = 'user';
-    protected $primarykey = 'uid';
+    protected $primaryKey = 'uid';
     protected $allowedFields = ['username','email','user_image'];
+
+
+    public function getCurrentUserData($email){
+        return $this->where('email',$email)->first();
+    }
+
+
+
 }

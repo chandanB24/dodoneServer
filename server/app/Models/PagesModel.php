@@ -5,8 +5,8 @@ use CodeIgniter\Model;
 class PagesModel extends Model
 {
     protected $table = 'pages';
-    protected $primarykey = 'pid';
-    protected $allowedFields = ['page_title','page_description','uid'];
+    protected $primaryKey = 'pid';
+    protected $allowedFields = ['page_title','uid'];
 
 
 
@@ -14,6 +14,8 @@ class PagesModel extends Model
         return $this->where('page_title',$pagetitle)->first();
     }
 
-
+    public function getCurrentPage($pageTitle){
+        return $this->where('page_title',$pageTitle)->first();
+    }
 
 }

@@ -6,8 +6,8 @@ use App\Models\PagesModel;
 class PostModel extends Model
 {
     protected $table = 'posts';
-    protected $primarykey = 'post_id';
-    protected $allowedFields = ['pid','post_title','post_body','post_url','yt_url','post_timestamp'];
+    protected $primaryKey = 'post_id';
+    protected $allowedFields = ['pid','post_title','post_body','post_url','yt_url','post_timestamp','image_url'];
 
     public function getPostByTitle($pageTitle){
         $pageModel = new PagesModel();
@@ -15,7 +15,7 @@ class PostModel extends Model
 
 
         if(!$page){
-            return $this->respond(['message'=>'no page found']);
+            return ['message' => 'no page found'];
         }
 
         return $this->where('pid',$page['pid'])->findAll();

@@ -23,5 +23,31 @@ class PagesController extends ResourceController{
         }
     }
 
+    public function createNewPage(){
+        $inputData = $this->request->getJSON();
+
+        $pageModel = new PagesModel();
+
+        $pageExist = $pageModel->where('page_title',$inputData->pageTitle)->first();
+
+        if($pageExist){
+            return $this->respond(['message'=>'Page name already exists']);
+        }
+        else{
+            $data = [
+                'page_title'=>$inputData->pageTitle,
+                'uid'=>$inputData->uid
+            ];
+
+            $insertData = $pageModel->insert($data);
+
+            
+        if($insertData){
+           $currentrPage =  $pageModel->getCurrentPage($data['page_title']);
+            return $this->respond($currentrPage);
+        }
+        }
+
+    }
 
 }
