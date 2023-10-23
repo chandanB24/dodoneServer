@@ -60,5 +60,19 @@ class PostController extends ResourceController{
         }
     }
 
+    public function deletePost($id){
+        $postModel = new PostModel();
+        
+        $deletePost = $postModel->where('post_id', $id)->delete();
+
+        if($deletePost){
+            return $this->respond(['message'=>'post deleted successfully']);
+        }
+        else{
+            return $this->respond(['error'=>'error in deleting']);
+        }
+
+    }
+
 
 }

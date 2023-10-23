@@ -12,6 +12,7 @@ class EndUserController extends ResourceController{
     protected $format = 'json';
     
     public function getUserPage($pagetitle){
+
         $postModel = new PostModel();
         $posts = $postModel->getPostByTitle($pagetitle);
 
@@ -22,4 +23,19 @@ class EndUserController extends ResourceController{
         return $this->respond($posts);
 
     }
+
+    public function getPageId($pagetitle){
+        $pageModel = new PagesModel();
+
+        $pageId = $pageModel->where('page_title',$pagetitle)->first();
+
+        if($pageId){
+            return $this->respond($pageId);
+        }
+        else{
+            return $this->respond(['message'=>'error']);
+        }
+        
+    }
+
 }

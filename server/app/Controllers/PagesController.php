@@ -50,4 +50,17 @@ class PagesController extends ResourceController{
 
     }
 
+    public function updatePage(){
+        $inputData = $this->request->getJSON();
+
+        $pageModel = new PagesModel();
+
+        $updatePage = $pageModel->where('pid',$inputData->pid)->set('page_title',$inputData->pageTitle)->update();
+
+        if($updatePage){
+            return $this->respond(['message'=>'updated succesfully']);
+        }
+
+    }
+
 }
